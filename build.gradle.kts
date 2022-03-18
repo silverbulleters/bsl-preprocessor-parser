@@ -1,11 +1,13 @@
 plugins {
     `java-library`
     antlr
+    jacoco
     `maven-publish`
+    id("com.github.gradle-git-version-calculator") version "1.1.0"
 }
 
 group = "org.github.silverbulleters"
-version = "0.1"
+version = gitVersionCalculator.calculateVersion("v")
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -25,6 +27,21 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+
+    reports {
+        html.isEnabled = true
+    }
+}
+
+tasks.check {
+    dependsOn(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = true
+        xml.destination = File("$buildDir/reports/jacoco/test/jacoco.xml")
+    }
 }
 
 tasks {
