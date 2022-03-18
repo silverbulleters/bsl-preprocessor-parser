@@ -8,6 +8,7 @@ plugins {
 
 group = "org.github.silverbulleters"
 version = gitVersionCalculator.calculateVersion("v")
+val encoding = "UTF-8"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -49,6 +50,10 @@ tasks {
         sourceCompatibility = JavaVersion.VERSION_17.toString()
         targetCompatibility = JavaVersion.VERSION_17.toString()
     }
+}
+
+tasks.withType<JavaCompile> {
+    options.encoding = encoding
 }
 
 tasks.withType<Jar>() {
