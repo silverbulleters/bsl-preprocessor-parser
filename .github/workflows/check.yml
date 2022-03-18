@@ -33,5 +33,3 @@ jobs:
         with:
           name: junit_${{ matrix.os }}_${{ matrix.java_version }}
           path: build/reports/tests/test
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
