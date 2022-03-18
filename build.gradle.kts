@@ -1,7 +1,9 @@
 plugins {
     `java-library`
     antlr
+    jacoco
     `maven-publish`
+    id("com.github.gradle-git-version-calculator") version "1.1.0"
 }
 
 group = "org.github.silverbulleters"
@@ -25,6 +27,21 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+
+    reports {
+        html.isEnabled = true
+    }
+}
+
+tasks.check {
+    dependsOn(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = true
+        xml.destination = File("$buildDir/reports/jacoco/test/jacoco.xml")
+    }
 }
 
 tasks {
