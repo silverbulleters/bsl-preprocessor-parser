@@ -1,0 +1,6 @@
+*.java eol=lf
+*.bsl eol=lf
+*.xml eol=lf
+*.md eol=lf
+*.json eol=lf
+*.bat eol=crlf
