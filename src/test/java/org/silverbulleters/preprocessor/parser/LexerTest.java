@@ -342,7 +342,6 @@ class LexerTest {
     Assertions.assertEquals(PreprocessorParserTokens.THEN, tokens.get(3).getType());
 
     tokens = getTokensFromString(ru);
-    Assertions.assertEquals(5, tokens.size());
     Assertions.assertEquals(PreprocessorParserTokens.SHARP, tokens.get(0).getType());
     Assertions.assertEquals(PreprocessorParserTokens.IF, tokens.get(1).getType());
     Assertions.assertEquals(PreprocessorParserTokens.AT_SERVER, tokens.get(2).getType());

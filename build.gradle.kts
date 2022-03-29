@@ -23,6 +23,7 @@ dependencies {
     antlr("org.antlr:antlr4:4.9.3")
     implementation("org.jetbrains:annotations:23.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testImplementation("org.assertj:assertj-core:3.18.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
@@ -30,7 +31,7 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 
     reports {
-        html.isEnabled = true
+        html.required.set(true)
     }
 }
 
@@ -40,8 +41,8 @@ tasks.check {
 
 tasks.jacocoTestReport {
     reports {
-        xml.isEnabled = true
-        xml.destination = File("$buildDir/reports/jacoco/test/jacoco.xml")
+        xml.required.set(true)
+        xml.outputLocation.set(File("$buildDir/reports/jacoco/test/jacoco.xml"))
     }
 }
 

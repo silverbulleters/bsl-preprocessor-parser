@@ -34,6 +34,7 @@ import java.util.Deque;
 import java.util.List;
 
 public class Trees {
+
   private Trees() {
     // noop
   }
@@ -99,6 +100,28 @@ public class Trees {
         || parent instanceof PreprocessorParser.ElsIfPartContext) {
 
         result.offerLast(parent);
+      }
+
+      parent = parent.getParent();
+    }
+
+    return result;
+  }
+
+  /**
+   * Получает список имен областей, в которых находится переданный узел
+   *
+   * @param node узел для которого необходимо получить имена областей
+   * @return список всех имен областей, в которых содержится переданный узел
+   */
+  public static @NotNull List<String> findAllRegionsNames(@NotNull Tree node) {
+
+    List<String> result = new ArrayList<>();
+    var parent = node.getParent();
+    while (parent != null) {
+      if (parent instanceof PreprocessorParser.RegionCommandContext) {
+        var regionName = ((PreprocessorParser.RegionCommandContext) parent).regionName().IDENTIFIER().getText();
+        result.add(regionName);
       }
 
       parent = parent.getParent();

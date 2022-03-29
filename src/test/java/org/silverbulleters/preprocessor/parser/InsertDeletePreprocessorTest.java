@@ -35,7 +35,8 @@ class InsertDeletePreprocessorTest {
     var pathToFile = Path.of("src/test/resources/insertDeleteCommand.bsl");
     var preprocessor = new Preprocessor();
     try (var inputStream = new FileInputStream(pathToFile.toFile())) {
-      var resultCode = preprocessor.preprocessModule(inputStream, Set.of(ExecutionContext.WEB_CLIENT, ExecutionContext.THIN_CLIENT));
+      var moduleContext = preprocessor.readModuleContext(inputStream);
+      var resultCode = preprocessor.preprocessModule(moduleContext, Set.of(ExecutionContext.WEB_CLIENT, ExecutionContext.THIN_CLIENT));
       Assertions.assertEquals(expectedCode(), resultCode.get(ExecutionContext.THIN_CLIENT));
       Assertions.assertEquals(expectedCode(), resultCode.get(ExecutionContext.WEB_CLIENT));
     } catch (IOException e) {

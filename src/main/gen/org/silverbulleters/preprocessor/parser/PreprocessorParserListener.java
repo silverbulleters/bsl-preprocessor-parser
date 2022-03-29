@@ -228,6 +228,46 @@ public interface PreprocessorParserListener extends ParseTreeListener {
 	 */
 	void exitCode(PreprocessorParser.CodeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PreprocessorParser#methodSignature}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodSignature(PreprocessorParser.MethodSignatureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PreprocessorParser#methodSignature}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodSignature(PreprocessorParser.MethodSignatureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PreprocessorParser#varDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarDefinition(PreprocessorParser.VarDefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PreprocessorParser#varDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarDefinition(PreprocessorParser.VarDefinitionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PreprocessorParser#codeId}.
+	 * @param ctx the parse tree
+	 */
+	void enterCodeId(PreprocessorParser.CodeIdContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PreprocessorParser#codeId}.
+	 * @param ctx the parse tree
+	 */
+	void exitCodeId(PreprocessorParser.CodeIdContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PreprocessorParser#simpleCode}.
+	 * @param ctx the parse tree
+	 */
+	void enterSimpleCode(PreprocessorParser.SimpleCodeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PreprocessorParser#simpleCode}.
+	 * @param ctx the parse tree
+	 */
+	void exitSimpleCode(PreprocessorParser.SimpleCodeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PreprocessorParser#expression}.
 	 * @param ctx the parse tree
 	 */
