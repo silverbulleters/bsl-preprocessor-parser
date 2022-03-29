@@ -24,7 +24,7 @@ package org.silverbulleters.preprocessor.parser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.silverbulleters.preprocessor.parser.internal.ModuleListener;
+import org.silverbulleters.preprocessor.parser.internal.PreprocessorListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,25 +43,31 @@ public final class Preprocessor {
    * который доступен в конкретном контексте. Весь недоступный код и все инструкции препроцессора будут заменены на знак пробела, в целях сохранения
    * оригинальных номеров строк при дальнейшем анализе кода.
    *
-   * @param inputStream Входящие текстовые данные, представляющие собой программный модуль написанный на языке 1С.
-   * @param contexts Перечень контекстов выполнения, в которых ожидается выполнение кода модуля. Например, веб-клиент, тонкий клиент, сервер и т.д.
-   * @return соответствие, где ключом является контекст выполнения кода 1С, а значением непосредственно код на языке 1С, который будет доступен в данном
+   * @param moduleContext Контекст программного модуля 1С, полученный при разборе модуля
+   * @param contexts      Перечень контекстов выполнения, в которых ожидается выполнение кода модуля. Например, веб-клиент, тонкий клиент, сервер и т.д.
+   * @return Соответствие, где ключом является контекст выполнения кода 1С, а значением непосредственно код на языке 1С, который будет доступен в данном
    * контексте выполнения. Данный текст НЕ будет содержать инструкции препроцессора.
+   */
+  public Map<ExecutionContext, String> preprocessModule(PreprocessorParser.ModuleContext moduleContext, Set<ExecutionContext> contexts) {
+    var listener = new PreprocessorListener();
+    var walker = new ParseTreeWalker();
+    listener.setRuntimeContext(contexts);
+    walker.walk(listener, moduleContext);
+
+    return listener.resultCode();
+  }
+
+  /**
+   * @param inputStream Входящие текстовые данные, представляющие собой программный модуль написанный на языке 1С.
+   * @return экземпляр контекста модуля, созданного после разбора парсером файла с исходным текстом
    * @throws IOException в случае ошибок при чтении входящего потока данных
    */
-  public Map<ExecutionContext, String> preprocessModule(InputStream inputStream, Set<ExecutionContext> contexts) throws IOException {
+  public PreprocessorParser.ModuleContext readModuleContext(InputStream inputStream) throws IOException {
     var charStream = CharStreams.fromStream(inputStream);
     var lexer = new PreprocessorParserTokens(charStream);
     var tokenStream = new CommonTokenStream(lexer);
 
     var preprocessor = new PreprocessorParser(tokenStream);
-    var module = preprocessor.module();
-
-    var listener = new ModuleListener();
-    var walker = new ParseTreeWalker();
-    listener.setRuntimeContext(contexts);
-    walker.walk(listener, module);
-
-    return listener.resultCode();
+    return preprocessor.module();
   }
 }

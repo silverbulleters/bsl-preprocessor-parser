@@ -36,7 +36,8 @@ class NestedCommandPreprocessorTest {
     var pathToFile = Path.of("src/test/resources/nestedCommands.bsl");
     var preprocessor = new Preprocessor();
     try (var inputStream = new FileInputStream(pathToFile.toFile())) {
-      var resultCode = preprocessor.preprocessModule(inputStream, Set.of(ExecutionContext.WEB_CLIENT, ExecutionContext.THIN_CLIENT));
+      var moduleContext = preprocessor.readModuleContext(inputStream);
+      var resultCode = preprocessor.preprocessModule(moduleContext, Set.of(ExecutionContext.WEB_CLIENT, ExecutionContext.THIN_CLIENT));
       Assertions.assertEquals(expectedThinClientCode(), resultCode.get(ExecutionContext.THIN_CLIENT));
       Assertions.assertEquals(expectedWebClientCode(), resultCode.get(ExecutionContext.WEB_CLIENT));
     } catch (IOException e) {
@@ -49,11 +50,11 @@ class NestedCommandPreprocessorTest {
       Функция Тест() Экспорт
       
       \s
-      \s
+      \s\s\s\s\s
       \s\s\s\s\s\sВозврат Неопределено;
+      \t\s
       \s
-      \s
-      \s
+      \s\s
       \s
       
       КонецФункции""";
@@ -64,11 +65,11 @@ class NestedCommandPreprocessorTest {
       Функция Тест() Экспорт
       
       \s
+      \s\s\s\s\s
       \s
-      \s
-      \s
+      \s\s
       \s\s\s\s\s\sВозврат Истина;
-      \s
+      \s\s\s\s\s
       \s
       
       КонецФункции""";

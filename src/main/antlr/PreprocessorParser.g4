@@ -54,7 +54,11 @@ elsIfTerm: SHARP ELSIF;
 elseTerm: SHARP ELSE EOL;
 endIfTerm: SHARP END_IF EOL?;
 
-code: (CODE | EOL)+;
+code: (methodSignature | varDefinition | simpleCode)+;
+methodSignature: (PROCEDURE | FUNCTION) SIGNATURE_WHITESPACE codeId;
+varDefinition: VAR SIGNATURE_WHITESPACE codeId;
+codeId: CODE_IDENTIFIER;
+simpleCode: (CODE | EOL | WHITESPACE)+;
 
 expression: NOT expression
     | expression AND expression

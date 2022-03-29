@@ -27,7 +27,6 @@ import org.silverbulleters.preprocessor.parser.ExecutionContext;
 import org.silverbulleters.preprocessor.parser.PreprocessorParser;
 import org.silverbulleters.preprocessor.parser.PreprocessorParserBaseListener;
 import org.silverbulleters.preprocessor.parser.Trees;
-import org.silverbulleters.preprocessor.parser.internal.IfCommandEvaluator;
 
 import java.util.ArrayList;
 import java.util.Deque;
@@ -40,7 +39,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public final class ModuleListener extends PreprocessorParserBaseListener {
+public final class PreprocessorListener extends PreprocessorParserBaseListener {
   private static final Pattern CLEAR_PATTERN = Pattern.compile("[^\\r\\n]+");
   private final Map<ExecutionContext, StringBuilder> resultCode = new EnumMap<>(ExecutionContext.class);
   private final Map<Tree, Set<ExecutionContext>> nodeToContexts = new HashMap<>();
