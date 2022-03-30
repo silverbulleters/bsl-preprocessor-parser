@@ -20,7 +20,7 @@
  */
 lexer grammar PreprocessorParserTokens;
 
-EOL: '\r'? '\n';
+EOL: [\r\n]+;
 WHITESPACE: [ \t]+;
 SHARP: '#' -> mode(DIRECTIVE_MODE);
 COMMENT: '//' ~[\r\n]* -> type(CODE);
@@ -36,7 +36,7 @@ APOSTROPHE: '\'';
 PROCEDURE: (P_RU R_RU O_RU CZ_RU E_RU D_RU U_RU R_RU A_RU | P R O C E D U R E) -> mode(SIGNATURE_MODE);
 FUNCTION: (F_RU U_RU N_RU K_RU CZ_RU I_RU YA_RU | F U N C T I O N) -> mode(SIGNATURE_MODE);
 VAR: (P_RU E_RU R_RU E_RU M_RU | V A R) -> mode(SIGNATURE_MODE);
-CODE: ~[#'"/\r\n \t]+;
+CODE: ~[#'"\r\n \t]+;
 
 mode DIRECTIVE_MODE;
 IF: I F | E_RU S_RU L_RU I_RU;

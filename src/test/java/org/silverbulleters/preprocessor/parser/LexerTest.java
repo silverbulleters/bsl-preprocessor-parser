@@ -36,6 +36,18 @@ import java.util.List;
 class LexerTest {
 
   @Test
+  void testSlashToken() {
+    String code = "Message(a / b);";
+    var tokens = getTokensFromString(code);
+    Assertions.assertEquals(6, tokens.size());
+    Assertions.assertEquals(PreprocessorParserTokens.CODE, tokens.get(0).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.WHITESPACE, tokens.get(1).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.CODE, tokens.get(2).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.WHITESPACE, tokens.get(3).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.CODE, tokens.get(4).getType());
+  }
+
+  @Test
   void testIfToken() {
     String en = "#If";
     String ru = "#ЕсЛи";
