@@ -24,14 +24,14 @@ EOL: '\r'? '\n';
 WHITESPACE: [ \t]+;
 SHARP: '#' -> mode(DIRECTIVE_MODE);
 COMMENT: '//' ~[\r\n]* -> type(CODE);
-BAR: '|';
-QUOTE: '"';
-APOSTROPHE: '\'';
 STRING_START: QUOTE (~["\r\n]| QUOTE QUOTE)* -> type(CODE);
 STRING_PART: BAR (~[\r\n"] | QUOTE QUOTE)* -> type(CODE);
 STRING_END: BAR (~["\r\n] | QUOTE QUOTE)* QUOTE -> type(CODE);
 STRING: QUOTE (~[\r\n"] | QUOTE QUOTE)* QUOTE -> type(CODE);
 DATE: APOSTROPHE (~['\r\n])* APOSTROPHE -> type(CODE);
+BAR: '|';
+QUOTE: '"';
+APOSTROPHE: '\'';
 
 PROCEDURE: (P_RU R_RU O_RU CZ_RU E_RU D_RU U_RU R_RU A_RU | P R O C E D U R E) -> mode(SIGNATURE_MODE);
 FUNCTION: (F_RU U_RU N_RU K_RU CZ_RU I_RU YA_RU | F U N C T I O N) -> mode(SIGNATURE_MODE);

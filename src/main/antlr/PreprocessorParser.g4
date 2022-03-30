@@ -58,7 +58,7 @@ code: (methodSignature | varDefinition | simpleCode)+;
 methodSignature: (PROCEDURE | FUNCTION) SIGNATURE_WHITESPACE codeId;
 varDefinition: VAR SIGNATURE_WHITESPACE codeId;
 codeId: CODE_IDENTIFIER;
-simpleCode: (CODE | EOL | WHITESPACE)+;
+simpleCode: (EOL | WHITESPACE | CODE)+;
 
 expression: NOT expression
     | expression AND expression

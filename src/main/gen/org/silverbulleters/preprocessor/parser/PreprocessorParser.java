@@ -1693,10 +1693,6 @@ public class PreprocessorParser extends Parser {
 	}
 
 	public static class SimpleCodeContext extends ParserRuleContext {
-		public List<TerminalNode> CODE() { return getTokens(PreprocessorParser.CODE); }
-		public TerminalNode CODE(int i) {
-			return getToken(PreprocessorParser.CODE, i);
-		}
 		public List<TerminalNode> EOL() { return getTokens(PreprocessorParser.EOL); }
 		public TerminalNode EOL(int i) {
 			return getToken(PreprocessorParser.EOL, i);
@@ -1704,6 +1700,10 @@ public class PreprocessorParser extends Parser {
 		public List<TerminalNode> WHITESPACE() { return getTokens(PreprocessorParser.WHITESPACE); }
 		public TerminalNode WHITESPACE(int i) {
 			return getToken(PreprocessorParser.WHITESPACE, i);
+		}
+		public List<TerminalNode> CODE() { return getTokens(PreprocessorParser.CODE); }
+		public TerminalNode CODE(int i) {
+			return getToken(PreprocessorParser.CODE, i);
 		}
 		public SimpleCodeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
