@@ -37,7 +37,8 @@ public class PreprocessorParser extends Parser {
 		WEB_CLIENT=29, MOBILE_STANDALONE_SERVER=30, MOBILE_APP_CLIENT=31, MOBILE_APP_SERVER=32, 
 		MOBILE_CLIENT=33, THICK_CLIENT_ORDINARY_APPLICATION=34, THICK_CLIENT_MANAGED_APPLICATION=35, 
 		EXTERNAL_CONNECTION=36, THEN=37, LPAREN=38, RPAREN=39, DIRECTIVE_WHTITESPACE=40, 
-		SIGNATURE_WHITESPACE=41, CODE_IDENTIFIER=42, IDENTIFIER=43, REGION_WHTITESPACE=44;
+		SIGNATURE_WHITESPACE=41, CODE_IDENTIFIER=42, IDENTIFIER=43, REGION_WHTITESPACE=44, 
+		SLASH=45;
 	public static final int
 		RULE_module = 0, RULE_directive = 1, RULE_insertCommand = 2, RULE_deleteCommand = 3, 
 		RULE_regionCommand = 4, RULE_ifCommand = 5, RULE_ifPart = 6, RULE_elsIfPart = 7, 
@@ -62,7 +63,7 @@ public class PreprocessorParser extends Parser {
 			null, null, null, "'#'", "'|'", "'\"'", "'''", null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, "'('", "')'"
+			null, null, null, "'('", "')'", null, null, null, null, null, "'/'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -75,7 +76,8 @@ public class PreprocessorParser extends Parser {
 			"WEB_CLIENT", "MOBILE_STANDALONE_SERVER", "MOBILE_APP_CLIENT", "MOBILE_APP_SERVER", 
 			"MOBILE_CLIENT", "THICK_CLIENT_ORDINARY_APPLICATION", "THICK_CLIENT_MANAGED_APPLICATION", 
 			"EXTERNAL_CONNECTION", "THEN", "LPAREN", "RPAREN", "DIRECTIVE_WHTITESPACE", 
-			"SIGNATURE_WHITESPACE", "CODE_IDENTIFIER", "IDENTIFIER", "REGION_WHTITESPACE"
+			"SIGNATURE_WHITESPACE", "CODE_IDENTIFIER", "IDENTIFIER", "REGION_WHTITESPACE", 
+			"SLASH"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -2223,7 +2225,7 @@ public class PreprocessorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3.\u011c\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3/\u011c\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
