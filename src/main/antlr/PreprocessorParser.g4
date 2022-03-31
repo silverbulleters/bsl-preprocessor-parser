@@ -49,10 +49,10 @@ regionName: IDENTIFIER EOL;
 endRegion: SHARP END_REGION EOL?;
 
 ifTerm: SHARP IF;
-thenTerm: THEN EOL;
+thenTerm: THEN WHITESPACE* EOL;
 elsIfTerm: SHARP ELSIF;
-elseTerm: SHARP ELSE EOL;
-endIfTerm: SHARP END_IF EOL?;
+elseTerm: SHARP ELSE WHITESPACE* EOL;
+endIfTerm: SHARP END_IF WHITESPACE* EOL?;
 
 code: (simpleCode | methodSignature | varDefinition);
 methodSignature: (PROCEDURE | FUNCTION) SIGNATURE_WHITESPACE codeId;
