@@ -38,21 +38,21 @@ ifPart: ifTerm expression thenTerm (code | directive)*;
 elsIfPart: elsIfTerm expression thenTerm (code | directive)*;
 elsePart: elseTerm (code | directive)*;
 
-insert: SHARP INSERT WHITESPACE* EOL;
-endInsert: SHARP END_INSERT WHITESPACE* EOL?;
+insert: SHARP INSERT (WHITESPACE | CODE)* EOL;
+endInsert: SHARP END_INSERT (WHITESPACE | CODE)* EOL?;
 
-delete: SHARP DELETE WHITESPACE* EOL;
-endDelete: SHARP END_DELETE WHITESPACE* EOL?;
+delete: SHARP DELETE (WHITESPACE | CODE)* EOL;
+endDelete: SHARP END_DELETE (WHITESPACE | CODE)* EOL?;
 
 region: SHARP REGION;
-regionName: IDENTIFIER WHITESPACE* EOL;
-endRegion: SHARP END_REGION WHITESPACE* EOL?;
+regionName: IDENTIFIER (WHITESPACE | CODE)* EOL;
+endRegion: SHARP END_REGION (WHITESPACE | CODE)* EOL?;
 
 ifTerm: SHARP IF;
-thenTerm: THEN WHITESPACE* EOL;
+thenTerm: THEN (WHITESPACE | CODE)* EOL;
 elsIfTerm: SHARP ELSIF;
-elseTerm: SHARP ELSE WHITESPACE* EOL;
-endIfTerm: SHARP END_IF WHITESPACE* EOL?;
+elseTerm: SHARP ELSE (WHITESPACE | CODE)* EOL;
+endIfTerm: SHARP END_IF (WHITESPACE | CODE)* EOL?;
 
 code: (simpleCode | methodSignature | varDefinition);
 methodSignature: (PROCEDURE | FUNCTION) SIGNATURE_WHITESPACE codeId;
