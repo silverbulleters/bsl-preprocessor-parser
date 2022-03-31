@@ -36,8 +36,8 @@ public class PreprocessorParser extends Parser {
 		OR=22, NOT=23, CLIENT=24, AT_CLIENT=25, AT_SERVER=26, SERVER=27, THIN_CLIENT=28, 
 		WEB_CLIENT=29, MOBILE_STANDALONE_SERVER=30, MOBILE_APP_CLIENT=31, MOBILE_APP_SERVER=32, 
 		MOBILE_CLIENT=33, THICK_CLIENT_ORDINARY_APPLICATION=34, THICK_CLIENT_MANAGED_APPLICATION=35, 
-		EXTERNAL_CONNECTION=36, THEN=37, LPAREN=38, RPAREN=39, IDENTIFIER=40, 
-		DIRECTIVE_WHTITESPACE=41, SIGNATURE_WHITESPACE=42, CODE_IDENTIFIER=43;
+		EXTERNAL_CONNECTION=36, THEN=37, LPAREN=38, RPAREN=39, DIRECTIVE_WHTITESPACE=40, 
+		SIGNATURE_WHITESPACE=41, CODE_IDENTIFIER=42, IDENTIFIER=43, REGION_WHTITESPACE=44;
 	public static final int
 		RULE_module = 0, RULE_directive = 1, RULE_insertCommand = 2, RULE_deleteCommand = 3, 
 		RULE_regionCommand = 4, RULE_ifCommand = 5, RULE_ifPart = 6, RULE_elsIfPart = 7, 
@@ -74,8 +74,8 @@ public class PreprocessorParser extends Parser {
 			"OR", "NOT", "CLIENT", "AT_CLIENT", "AT_SERVER", "SERVER", "THIN_CLIENT", 
 			"WEB_CLIENT", "MOBILE_STANDALONE_SERVER", "MOBILE_APP_CLIENT", "MOBILE_APP_SERVER", 
 			"MOBILE_CLIENT", "THICK_CLIENT_ORDINARY_APPLICATION", "THICK_CLIENT_MANAGED_APPLICATION", 
-			"EXTERNAL_CONNECTION", "THEN", "LPAREN", "RPAREN", "IDENTIFIER", "DIRECTIVE_WHTITESPACE", 
-			"SIGNATURE_WHITESPACE", "CODE_IDENTIFIER"
+			"EXTERNAL_CONNECTION", "THEN", "LPAREN", "RPAREN", "DIRECTIVE_WHTITESPACE", 
+			"SIGNATURE_WHITESPACE", "CODE_IDENTIFIER", "IDENTIFIER", "REGION_WHTITESPACE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -1986,7 +1986,7 @@ public class PreprocessorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3-\u00eb\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3.\u00eb\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2035,7 +2035,7 @@ public class PreprocessorParser extends Parser {
 		"\7\5\2\2\u0098\u0099\7\25\2\2\u0099\u009a\7\3\2\2\u009a\31\3\2\2\2\u009b"+
 		"\u009c\7\5\2\2\u009c\u009e\7\26\2\2\u009d\u009f\7\3\2\2\u009e\u009d\3"+
 		"\2\2\2\u009e\u009f\3\2\2\2\u009f\33\3\2\2\2\u00a0\u00a1\7\5\2\2\u00a1"+
-		"\u00a2\7\21\2\2\u00a2\35\3\2\2\2\u00a3\u00a4\7*\2\2\u00a4\u00a5\7\3\2"+
+		"\u00a2\7\21\2\2\u00a2\35\3\2\2\2\u00a3\u00a4\7-\2\2\u00a4\u00a5\7\3\2"+
 		"\2\u00a5\37\3\2\2\2\u00a6\u00a7\7\5\2\2\u00a7\u00a9\7\22\2\2\u00a8\u00aa"+
 		"\7\3\2\2\u00a9\u00a8\3\2\2\2\u00a9\u00aa\3\2\2\2\u00aa!\3\2\2\2\u00ab"+
 		"\u00ac\7\5\2\2\u00ac\u00ad\7\r\2\2\u00ad#\3\2\2\2\u00ae\u00af\7\'\2\2"+
@@ -2046,9 +2046,9 @@ public class PreprocessorParser extends Parser {
 		"\2\2\2\u00bd\u00c1\5.\30\2\u00be\u00c1\5\60\31\2\u00bf\u00c1\5\64\33\2"+
 		"\u00c0\u00bd\3\2\2\2\u00c0\u00be\3\2\2\2\u00c0\u00bf\3\2\2\2\u00c1\u00c2"+
 		"\3\2\2\2\u00c2\u00c0\3\2\2\2\u00c2\u00c3\3\2\2\2\u00c3-\3\2\2\2\u00c4"+
-		"\u00c5\t\2\2\2\u00c5\u00c6\7,\2\2\u00c6\u00c7\5\62\32\2\u00c7/\3\2\2\2"+
-		"\u00c8\u00c9\7\13\2\2\u00c9\u00ca\7,\2\2\u00ca\u00cb\5\62\32\2\u00cb\61"+
-		"\3\2\2\2\u00cc\u00cd\7-\2\2\u00cd\63\3\2\2\2\u00ce\u00d0\t\3\2\2\u00cf"+
+		"\u00c5\t\2\2\2\u00c5\u00c6\7+\2\2\u00c6\u00c7\5\62\32\2\u00c7/\3\2\2\2"+
+		"\u00c8\u00c9\7\13\2\2\u00c9\u00ca\7+\2\2\u00ca\u00cb\5\62\32\2\u00cb\61"+
+		"\3\2\2\2\u00cc\u00cd\7,\2\2\u00cd\63\3\2\2\2\u00ce\u00d0\t\3\2\2\u00cf"+
 		"\u00ce\3\2\2\2\u00d0\u00d1\3\2\2\2\u00d1\u00cf\3\2\2\2\u00d1\u00d2\3\2"+
 		"\2\2\u00d2\65\3\2\2\2\u00d3\u00d4\b\34\1\2\u00d4\u00d5\7\31\2\2\u00d5"+
 		"\u00dc\5\66\34\7\u00d6\u00dc\58\35\2\u00d7\u00d8\7(\2\2\u00d8\u00d9\5"+
