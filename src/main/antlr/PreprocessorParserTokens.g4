@@ -22,8 +22,8 @@ lexer grammar PreprocessorParserTokens;
 
 EOL: [\r\n]+;
 WHITESPACE: [ \t]+;
-SHARP: '#' -> mode(DIRECTIVE_MODE);
 COMMENT: '//' ~[\r\n]* -> type(CODE);
+SHARP: '#' -> mode(DIRECTIVE_MODE);
 STRING_START: QUOTE (~["\r\n]| QUOTE QUOTE)* -> type(CODE);
 STRING_PART: BAR (~[\r\n"] | QUOTE QUOTE)* -> type(CODE);
 STRING_END: BAR (~["\r\n] | QUOTE QUOTE)* QUOTE -> type(CODE);
