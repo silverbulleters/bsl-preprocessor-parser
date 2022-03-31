@@ -37,15 +37,16 @@ class LexerTest {
 
   @Test
   void testRegionName() {
-    String code = "#region Client\n#EndRegion";
+    String code = "#region Client \n#EndRegion";
     var tokens = getTokensFromString(code);
-    Assertions.assertEquals(7, tokens.size());
+    Assertions.assertEquals(8, tokens.size());
     Assertions.assertEquals(PreprocessorParserTokens.SHARP, tokens.get(0).getType());
     Assertions.assertEquals(PreprocessorParserTokens.REGION, tokens.get(1).getType());
     Assertions.assertEquals(PreprocessorParserTokens.IDENTIFIER, tokens.get(2).getType());
-    Assertions.assertEquals(PreprocessorParserTokens.EOL, tokens.get(3).getType());
-    Assertions.assertEquals(PreprocessorParserTokens.SHARP, tokens.get(4).getType());
-    Assertions.assertEquals(PreprocessorParserTokens.END_REGION, tokens.get(5).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.WHITESPACE, tokens.get(3).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.EOL, tokens.get(4).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.SHARP, tokens.get(5).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.END_REGION, tokens.get(6).getType());
   }
 
   @Test

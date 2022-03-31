@@ -38,15 +38,15 @@ ifPart: ifTerm expression thenTerm (code | directive)*;
 elsIfPart: elsIfTerm expression thenTerm (code | directive)*;
 elsePart: elseTerm (code | directive)*;
 
-insert: SHARP INSERT EOL;
-endInsert: SHARP END_INSERT EOL?;
+insert: SHARP INSERT WHITESPACE* EOL;
+endInsert: SHARP END_INSERT WHITESPACE* EOL?;
 
-delete: SHARP DELETE EOL;
-endDelete: SHARP END_DELETE EOL?;
+delete: SHARP DELETE WHITESPACE* EOL;
+endDelete: SHARP END_DELETE WHITESPACE* EOL?;
 
 region: SHARP REGION;
-regionName: IDENTIFIER EOL;
-endRegion: SHARP END_REGION EOL?;
+regionName: IDENTIFIER WHITESPACE* EOL;
+endRegion: SHARP END_REGION WHITESPACE* EOL?;
 
 ifTerm: SHARP IF;
 thenTerm: THEN WHITESPACE* EOL;
