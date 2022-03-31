@@ -48,7 +48,7 @@ class InsertDeletePreprocessorTest {
     return """
       Процедура Тест()
       \s
-      \s
+      \s\s\s
       \s
       \s
       Возврат Истина;
