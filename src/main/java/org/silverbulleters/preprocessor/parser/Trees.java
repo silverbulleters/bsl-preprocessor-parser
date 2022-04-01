@@ -32,8 +32,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.Set;
 
 public class Trees {
+
+  private static final Set<Integer> NON_CODE_TOKEN_TYPES = Set.of(
+    PreprocessorParserTokens.WHITESPACE,
+    PreprocessorParserTokens.SIGNATURE_WHITESPACE,
+    PreprocessorParserTokens.DIRECTIVE_WHTITESPACE,
+    PreprocessorParserTokens.REGION_WHTITESPACE,
+    PreprocessorParserTokens.EOL);
 
   private Trees() {
     // noop
@@ -59,6 +67,33 @@ public class Trees {
 
     List<Token> result = new ArrayList<>();
     getTokensFromParseTree(tree, result);
+
+    return Collections.unmodifiableList(result);
+  }
+
+  /**
+   * Получение списка токенов всех дочерних элементов узла, за исключением "пустых" токенов, таких, как
+   * пробелы, переводы строк и комментарии
+   *
+   * @param tree узел дерева, для которого необходимо получить токены
+   * @return не модифицируемый список всех токенов узла и его дочерних элементов.
+   */
+  public static List<Token> getCodeTokens(@NotNull ParseTree tree) {
+    if (tree instanceof TerminalNode) {
+      var node = (TerminalNode) tree;
+      var token = node.getSymbol();
+      if (!NON_CODE_TOKEN_TYPES.contains(token.getType()) && !token.getText().startsWith("//")) {
+        return List.of(token);
+      }
+
+    }
+
+    if (tree.getChildCount() == 0) {
+      return Collections.emptyList();
+    }
+
+    List<Token> result = new ArrayList<>();
+    getCodeTokensFromParseTree(tree, result);
 
     return Collections.unmodifiableList(result);
   }
@@ -139,6 +174,21 @@ public class Trees {
         tokens.add(token);
       } else {
         getTokensFromParseTree(childTree, tokens);
+      }
+    }
+  }
+
+  private static void getCodeTokensFromParseTree(@NotNull ParseTree tree, List<Token> tokens) {
+    for (var i = 0; i < tree.getChildCount(); i++) {
+      var childTree = tree.getChild(i);
+      if (childTree instanceof TerminalNode) {
+        TerminalNode node = (TerminalNode) childTree;
+        var token = node.getSymbol();
+        if (!NON_CODE_TOKEN_TYPES.contains(token.getType()) && !token.getText().startsWith("//")) {
+          tokens.add(token);
+        }
+      } else {
+        getCodeTokensFromParseTree(childTree, tokens);
       }
     }
   }
