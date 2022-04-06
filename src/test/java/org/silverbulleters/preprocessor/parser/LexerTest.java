@@ -36,6 +36,32 @@ import java.util.List;
 class LexerTest {
 
   @Test
+  void testRegionName() {
+    String code = "#region Client \n#EndRegion";
+    var tokens = getTokensFromString(code);
+    Assertions.assertEquals(8, tokens.size());
+    Assertions.assertEquals(PreprocessorParserTokens.SHARP, tokens.get(0).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.REGION, tokens.get(1).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.IDENTIFIER, tokens.get(2).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.WHITESPACE, tokens.get(3).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.EOL, tokens.get(4).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.SHARP, tokens.get(5).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.END_REGION, tokens.get(6).getType());
+  }
+
+  @Test
+  void testSlashToken() {
+    String code = "Message(a / b);";
+    var tokens = getTokensFromString(code);
+    Assertions.assertEquals(6, tokens.size());
+    Assertions.assertEquals(PreprocessorParserTokens.CODE, tokens.get(0).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.WHITESPACE, tokens.get(1).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.CODE, tokens.get(2).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.WHITESPACE, tokens.get(3).getType());
+    Assertions.assertEquals(PreprocessorParserTokens.CODE, tokens.get(4).getType());
+  }
+
+  @Test
   void testIfToken() {
     String en = "#If";
     String ru = "#ЕсЛи";

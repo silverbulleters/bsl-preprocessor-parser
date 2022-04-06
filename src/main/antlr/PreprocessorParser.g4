@@ -38,27 +38,27 @@ ifPart: ifTerm expression thenTerm (code | directive)*;
 elsIfPart: elsIfTerm expression thenTerm (code | directive)*;
 elsePart: elseTerm (code | directive)*;
 
-insert: SHARP INSERT EOL;
-endInsert: SHARP END_INSERT EOL?;
+insert: SHARP INSERT (WHITESPACE | CODE)* EOL;
+endInsert: SHARP END_INSERT (WHITESPACE | CODE)* EOL?;
 
-delete: SHARP DELETE EOL;
-endDelete: SHARP END_DELETE EOL?;
+delete: SHARP DELETE (WHITESPACE | CODE)* EOL;
+endDelete: SHARP END_DELETE (WHITESPACE | CODE)* EOL?;
 
 region: SHARP REGION;
-regionName: IDENTIFIER EOL;
-endRegion: SHARP END_REGION EOL?;
+regionName: IDENTIFIER (WHITESPACE | CODE)* EOL;
+endRegion: SHARP END_REGION (WHITESPACE | CODE)* EOL?;
 
 ifTerm: SHARP IF;
-thenTerm: THEN EOL;
+thenTerm: THEN (WHITESPACE | CODE)* EOL;
 elsIfTerm: SHARP ELSIF;
-elseTerm: SHARP ELSE EOL;
-endIfTerm: SHARP END_IF EOL?;
+elseTerm: SHARP ELSE (WHITESPACE | CODE)* EOL;
+endIfTerm: SHARP END_IF (WHITESPACE | CODE)* EOL?;
 
-code: (methodSignature | varDefinition | simpleCode)+;
+code: (simpleCode | methodSignature | varDefinition);
 methodSignature: (PROCEDURE | FUNCTION) SIGNATURE_WHITESPACE codeId;
 varDefinition: VAR SIGNATURE_WHITESPACE codeId;
 codeId: CODE_IDENTIFIER;
-simpleCode: (CODE | EOL | WHITESPACE)+;
+simpleCode: (EOL | WHITESPACE | CODE);
 
 expression: NOT expression
     | expression AND expression

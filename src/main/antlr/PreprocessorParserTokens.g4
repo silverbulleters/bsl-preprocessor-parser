@@ -20,30 +20,31 @@
  */
 lexer grammar PreprocessorParserTokens;
 
-EOL: '\r'? '\n';
+EOL: [\r\n]+;
 WHITESPACE: [ \t]+;
+COMMENT: SLASH SLASH ~[\r\n]* -> type(CODE);
 SHARP: '#' -> mode(DIRECTIVE_MODE);
-COMMENT: '//' ~[\r\n]* -> type(CODE);
-BAR: '|';
-QUOTE: '"';
-APOSTROPHE: '\'';
 STRING_START: QUOTE (~["\r\n]| QUOTE QUOTE)* -> type(CODE);
 STRING_PART: BAR (~[\r\n"] | QUOTE QUOTE)* -> type(CODE);
 STRING_END: BAR (~["\r\n] | QUOTE QUOTE)* QUOTE -> type(CODE);
 STRING: QUOTE (~[\r\n"] | QUOTE QUOTE)* QUOTE -> type(CODE);
 DATE: APOSTROPHE (~['\r\n])* APOSTROPHE -> type(CODE);
+BAR: '|';
+QUOTE: '"';
+APOSTROPHE: '\'';
+SLASH: '/' -> type(CODE);
 
 PROCEDURE: (P_RU R_RU O_RU CZ_RU E_RU D_RU U_RU R_RU A_RU | P R O C E D U R E) -> mode(SIGNATURE_MODE);
 FUNCTION: (F_RU U_RU N_RU K_RU CZ_RU I_RU YA_RU | F U N C T I O N) -> mode(SIGNATURE_MODE);
 VAR: (P_RU E_RU R_RU E_RU M_RU | V A R) -> mode(SIGNATURE_MODE);
-CODE: ~[#'"/\r\n \t]+;
+CODE: ~[#'"\r\n \t/]+;
 
 mode DIRECTIVE_MODE;
 IF: I F | E_RU S_RU L_RU I_RU;
 ELSIF: E L S I F | I_RU N_RU A_RU CH_RU E_RU E_RU S_RU L_RU I_RU;
 ELSE: (E L S E | I_RU N_RU A_RU CH_RU E_RU) -> mode(DEFAULT_MODE);
 END_IF: (E N D I F | K_RU O_RU N_RU E_RU CZ_RU E_RU S_RU L_RU I_RU) -> mode(DEFAULT_MODE);
-REGION: (R E G I O N | O_RU B_RU L_RU A_RU S_RU T_RU SOFT_SIGN_RU);
+REGION: (R E G I O N | O_RU B_RU L_RU A_RU S_RU T_RU SOFT_SIGN_RU) -> mode(REGION_MODE);
 END_REGION: (E N D R E G I O N | K_RU O_RU N_RU E_RU CZ_RU O_RU B_RU L_RU A_RU S_RU T_RU I_RU) -> mode(DEFAULT_MODE);
 INSERT: (I N S E R T | V_RU S_RU T_RU A_RU V_RU K_RU A_RU) -> mode(DEFAULT_MODE);
 END_INSERT: (E N D I N S E R T | K_RU O_RU N_RU E_RU CZ_RU V_RU S_RU T_RU A_RU V_RU K_RU I_RU) -> mode(DEFAULT_MODE);
@@ -74,12 +75,15 @@ EXTERNAL_CONNECTION: E X T E R N A L C O N N E C T I O N
 THEN: (T H E N | T_RU O_RU G_RU D_RU A_RU) -> mode(DEFAULT_MODE);
 LPAREN: '(';
 RPAREN: ')';
-IDENTIFIER: LETTER (LETTER | DIGIT)* -> mode(DEFAULT_MODE);
 DIRECTIVE_WHTITESPACE: [ \t]+ -> skip;
 
 mode SIGNATURE_MODE;
 SIGNATURE_WHITESPACE: [ \t]+;
 CODE_IDENTIFIER: LETTER (LETTER | DIGIT)* -> mode(DEFAULT_MODE);
+
+mode REGION_MODE;
+IDENTIFIER: LETTER (LETTER | DIGIT)* -> mode(DEFAULT_MODE);
+REGION_WHTITESPACE: [ \t]+ -> skip;
 
 fragment A: [Aa];
 fragment B: [Bb];

@@ -50,7 +50,7 @@ class SimplePreprocessorTest {
     return """
       Процедура  Тест()
       \s
-      \s
+      \s\s\s\s\s\s
       \s
       \s
       \s
@@ -63,11 +63,11 @@ class SimplePreprocessorTest {
     return """
       Процедура  Тест()
       \s
-       Сообщить(ТонкийКлиент);
+       Сообщить(ТонкийКлиент / 2);
       \s
       \s
       \s
-      \s
+      \s\s\s\s
       \s
       КонецПроцедуры""";
   }
@@ -76,11 +76,11 @@ class SimplePreprocessorTest {
     return """
       Процедура  Тест()
       \s
-      \s
+      \s\s\s\s\s\s
       \s
       Сообщить(Веб);
       \s
-      \s
+      \s\s\s\s
       \s
       КонецПроцедуры""";
   }

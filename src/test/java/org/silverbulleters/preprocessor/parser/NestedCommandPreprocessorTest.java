@@ -53,7 +53,7 @@ class NestedCommandPreprocessorTest {
       \s\s\s\s\s
       \s\s\s\s\s\sВозврат Неопределено;
       \t\s
-      \s
+      \s\s\s\s
       \s\s
       \s
       
@@ -66,7 +66,7 @@ class NestedCommandPreprocessorTest {
       
       \s
       \s\s\s\s\s
-      \s
+      \s\s\s\s
       \s\s
       \s\s\s\s\s\sВозврат Истина;
       \s\s\s\s\s
