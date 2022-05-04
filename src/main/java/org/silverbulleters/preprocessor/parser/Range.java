@@ -23,6 +23,8 @@ package org.silverbulleters.preprocessor.parser;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  * Представление диапазона (range) участков кода. Характеризуется значениями начальной и конечной строки.
  */
@@ -49,5 +51,18 @@ public class Range {
 
   public boolean containsInclusive(@NotNull Range other) {
     return other.startLine >= this.startLine && other.endLine <= this.endLine;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Range range = (Range) o;
+    return startLine == range.startLine && endLine == range.endLine;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(startLine, endLine);
   }
 }
