@@ -65,4 +65,12 @@ public class Range {
   public int hashCode() {
     return Objects.hash(startLine, endLine);
   }
+
+  @Override
+  public String toString() {
+    return "Range{" +
+      "startLine=" + startLine +
+      ", endLine=" + endLine +
+      '}';
+  }
 }

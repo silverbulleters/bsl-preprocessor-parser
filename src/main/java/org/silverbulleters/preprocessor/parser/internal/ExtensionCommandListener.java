@@ -29,8 +29,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class ExtensionCommandListener extends PreprocessorParserBaseListener {
+  private static final Pattern NEW_LINE = Pattern.compile("[\\r\\n]");
   private final Map<String, List<Range>> methodNamesToInsertCodeRanges = new HashMap<>();
   private String currentMethodName = "";
 
@@ -55,7 +57,13 @@ public class ExtensionCommandListener extends PreprocessorParserBaseListener {
     var firstCodeNode = codeNodes.get(0);
     var lastCodeNode = codeNodes.get(codeNodes.size() - 1);
     var startLine = firstCodeNode.getStart().getLine();
-    var endLine = lastCodeNode.getStop().getLine();
+    int endLine;
+    if (NEW_LINE.matcher(lastCodeNode.getText()).matches()) {
+      endLine = lastCodeNode.getStop().getLine() + 1;
+    } else {
+      endLine = lastCodeNode.getStop().getLine();
+    }
+
     var range = new Range(startLine, endLine);
     methodNamesToInsertCodeRanges.compute(currentMethodName, (key, value) -> {
       if (value == null) {
